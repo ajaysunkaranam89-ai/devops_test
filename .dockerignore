@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.git
+k8s
+argocd
+jenkins
+Jenkinsfile
+*.md

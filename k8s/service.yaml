@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-practice-app
+  namespace: practice
+spec:
+  # ClusterIP + `kubectl port-forward` works on any kind cluster.
+  # (NodePorts aren't reachable from Windows unless kind was created with extraPortMappings,
+  #  and 30080 is already taken by Jenkins in this cluster.)
+  type: ClusterIP
+  selector:
+    app: node-practice-app
+  ports:
+    - port: 80
+      targetPort: 3000

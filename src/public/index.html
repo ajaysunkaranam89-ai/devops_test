@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DevOps Pipeline Practice</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">⎈</span>
+      <div>
+        <h1>DevOps Pipeline</h1>
+        <p class="sub">node-practice-app · GitHub → Jenkins → Docker Hub → ArgoCD → Kubernetes</p>
+      </div>
+    </div>
+    <div class="status">
+      <span class="badge" id="versionBadge">v…</span>
+      <span class="health"><span class="dot" id="healthDot"></span><span id="healthText">checking</span></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- PIPELINE -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>Delivery pipeline</h2>
+        <button class="btn" id="runBtn">▶ Simulate a release</button>
+      </div>
+      <div class="pipeline" id="pipeline"></div>
+      <div class="detail" id="detail"></div>
+    </section>
+
+    <div class="grid">
+      <!-- LIVE POD -->
+      <section class="panel">
+        <div class="panel-head"><h2>Running pod</h2><span class="muted small">auto-refresh 5s</span></div>
+        <dl class="kv">
+          <dt>Pod / hostname</dt><dd id="hostname">–</dd>
+          <dt>Image version</dt><dd id="version">–</dd>
+          <dt>Git commit</dt><dd id="commit">–</dd>
+          <dt>Node.js</dt><dd id="node">–</dd>
+          <dt>Uptime</dt><dd id="uptime">–</dd>
+          <dt>Requests served</dt><dd id="requests">–</dd>
+        </dl>
+      </section>
+
+      <!-- LOAD BALANCING -->
+      <section class="panel">
+        <div class="panel-head"><h2>Load balancing</h2><button class="btn ghost" id="pingBtn">Send 20 requests</button></div>
+        <p class="muted small">The Service spreads traffic across replicas. Run with <code>replicas: 2</code> or more to see several pods answer.</p>
+        <div id="pods" class="pods"><p class="muted small">No requests sent yet.</p></div>
+      </section>
+    </div>
+
+    <!-- CHECKLIST -->
+    <section class="panel">
+      <div class="panel-head"><h2>Learning checklist</h2><span class="muted small" id="progressText"></span></div>
+      <div class="progress"><div id="progressBar"></div></div>
+      <ul class="checklist" id="checklist"></ul>
+    </section>
+  </main>
+
+  <footer>Made for practice · edit <code>src/public</code>, push to GitHub, and watch the version badge change.</footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

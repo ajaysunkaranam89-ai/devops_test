@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-practice-app
+  namespace: practice
+  labels:
+    app: node-practice-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-practice-app
+  template:
+    metadata:
+      labels:
+        app: node-practice-app
+    spec:
+      containers:
+        - name: node-practice-app
+          # Jenkins rewrites this line on every build (GitOps). ArgoCD then deploys it.
+          image: node-practice-app:local-1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APP_VERSION
+              value: "latest"
+            - name: GIT_COMMIT
+              value: "none"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 3
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
