@@ -18,14 +18,14 @@ spec:
       containers:
         - name: node-practice-app
           # Jenkins rewrites this line on every build (GitOps). ArgoCD then deploys it.
-          image: ajaysunkaranam/node-practice-app:1
+          image: ajaysunkaranam/node-practice-app:4
           ports:
             - containerPort: 3000
           env:
             - name: APP_VERSION
-              value: "1"
+              value: "4"
             - name: GIT_COMMIT
-              value: "c7bbd6f"
+              value: "5eecc87"
           readinessProbe:
             httpGet:
               path: /health
